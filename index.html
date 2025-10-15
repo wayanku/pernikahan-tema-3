@@ -145,6 +145,10 @@
             max-width: 700px; margin: 0 auto; padding: 5vh 25px; text-align: center; 
             position: relative;
         }
+        /* [RESPONSIVE] Perlebar konten di layar desktop */
+        @media (min-width: 1200px) {
+            #main-content { max-width: 1100px; }
+        }
         .section { margin-bottom: 12vh; position: relative; }
         #main-content p { line-height: 1.8; font-size: clamp(1.05rem, 2.5vw, 1.15rem); }
 
@@ -214,61 +218,51 @@
         .quote-source { font-style: normal; display: block; }
         .quote-translation { margin-top: 15px; font-style: normal; }
         
-        /* [PERUBAHAN TOTAL] Desain baru yang drastis untuk kartu mempelai */
+        /* [PERUBAHAN TOTAL] Desain tanpa kartu, bingkai di depan */
         .mempelai-card {
-            background-color: var(--color-off-white);
-            /* Pola geometris halus dan gradasi pink lembut */
-            background-image: 
-                radial-gradient(circle at 1px 1px, rgba(192, 134, 149, 0.15) 1px, transparent 0),
-                linear-gradient(165deg, #fff, var(--color-off-white) 85%);
-            background-size: 20px 20px, 100% 100%;
-            border-radius: 20px;
-            padding: 2rem 1.5rem;
-            box-shadow: 0 15px 45px rgba(0,0,0,0.1);
             position: relative;
             text-align: center;
-            overflow: hidden;
-            border: 1px solid var(--color-green);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         .mempelai-card__photo-wrapper {
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
+            width: clamp(220px, 65vw, 260px); /* [RESPONSIVE] Ukuran bingkai dibuat responsif */
+            height: clamp(220px, 65vw, 260px); /* [RESPONSIVE] Ukuran bingkai dibuat responsif */
             margin: 0 auto;
-            padding: 7px; /* Jarak untuk border ganda */
-            background-color: var(--color-background);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-            border: 1px solid var(--color-green);
             position: relative;
-            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        .mempelai-card__photo {
+        .mempelai-card__frame {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
+            z-index: 2; /* Bingkai di lapisan depan */
+            pointer-events: none; /* Agar tidak bisa diklik */
+        }
+        .mempelai-card__photo {
+            width: clamp(205px, 60vw, 245px); /* [RESPONSIVE] Ukuran foto dibuat responsif */
+            height: clamp(205px, 60vw, 245px); /* [RESPONSIVE] Ukuran foto dibuat responsif */
             object-fit: cover;
             border-radius: 50%;
-            border: 2px solid var(--color-off-white);
+            z-index: 1; /* Foto di belakang bingkai */
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
         }
         .mempelai-card__details {
-            margin-top: -35px; /* Teks menimpa foto */
-            padding-top: 45px; /* Beri ruang agar teks tidak terlalu menempel */
-            position: relative;
-            z-index: 3;
+            margin-top: 1.5rem; /* Jarak antara foto dan teks */
         }
-        .mempelai-card__ornament {
-            position: absolute;
-            width: 160px;
-            opacity: 0.3;
-            pointer-events: none;
-            z-index: 1;
-            filter: drop-shadow(0 4px 10px var(--color-green));
-            left: 50%;
-            transform: translateX(-50%);
-        }
-        .mempelai-card__ornament.top { top: 10px; }
-        .mempelai-card__ornament.bottom { bottom: 10px; transform: translateX(-50%) rotate(180deg); }
         .mempelai-card .name { margin-top: 0; margin-bottom: 0.75rem; }
         .mempelai-card .parents { font-size: clamp(1.1rem, 4vw, 1.2rem); line-height: 1.6;
+        }
+        /* [RESPONSIVE] Atur mempelai berdampingan di desktop */
+        .couple-container { display: flex; flex-direction: column; align-items: center; gap: 2vh; }
+        @media (min-width: 768px) {
+            .couple-container { flex-direction: row; justify-content: center; align-items: flex-start; gap: 2rem; }
+            .couple-container .section { margin-bottom: 0; }
         }
 
         .map-button-outline {
@@ -364,6 +358,16 @@
         /* [PERUBAHAN] CSS untuk merapikan nomor rekening di layar sempit */
         .account-number{font-family:"Courier New",Courier,monospace;font-size:1.8rem;font-weight:600;letter-spacing:2px;margin:5px 0;color:#fff; overflow-wrap: break-word; word-break: break-all;}
         .copy-button{background-color:rgba(255,255,255,.9);color:var(--color-dark-green);border:none;padding:12px 25px;border-radius:50px;font-weight:600;cursor:pointer;margin-top:20px;transition:background-color .3s,transform .2s;display:inline-flex;align-items:center;gap:8px}.copy-button:hover{background-color:#fff;transform:scale(1.05)}.ornament-container{position:absolute;top:0;left:0;width:100%;height:100%;overflow:hidden;pointer-events:none}.ornament-image{position:absolute;z-index:5;width:clamp(100px,25vw,200px);filter:drop-shadow(0 4px 8px rgba(0,0,0,.1));transition:transform 1s cubic-bezier(.25,1,.5,1),opacity 1s ease}.ornament-right{top:10vh;right:0;transform:translateX(50%);opacity:0}.ornament-left{bottom:10vh;left:0;transform:translateX(-50%) scaleX(-1);opacity:0}.ornament-image.visible{transform:translateX(0) scaleX(var(--scale,1));opacity:.5}.creator-credit{margin-top:2rem;font-size:.9rem;color:#888}.creator-credit a{color:var(--color-dark-green);font-weight:600;text-decoration:none}.social-links{display:flex;justify-content:center;gap:15px;margin-top:1rem}.social-links a{color:var(--color-green);transition:color .3s,transform .3s}.social-links a:hover{color:var(--color-dark-green);transform:scale(1.1)}.rsvp-wishes-container{background-color:var(--color-off-white);border-radius:20px;padding:25px;box-shadow:0 10px 40px rgba(0,0,0,.08);margin-top:20px;border:1px solid #EAE8E1}.rsvp-wishes-container h2{margin-top:0}.section.visible .ornament-image{opacity:.5;transform:translateX(0) scaleX(var(--scale,1))}@keyframes open-flap{from{transform:rotateX(0)}to{transform:rotateX(180deg)}}@keyframes fade-out-envelope{from{opacity:1;transform:translateY(0) scale(1)}to{opacity:0;transform:translateY(-80px) scale(.95)}}@keyframes break-seal{from{transform:scale(1);opacity:1}to{transform:scale(1.5);opacity:0}}#envelope-container{position:fixed;top:0;left:0;width:100%;height:100%;display:flex;justify-content:center;align-items:center;background-color:#e9e5e0;z-index:100;transition:opacity .8s ease-out .5s,transform .8s ease-out .5s}.envelope-wrapper{display:flex;flex-direction:column;align-items:center}.envelope{position:relative;width:clamp(300px,90vw,500px);height:clamp(200px,60vw,300px);background-color:#f7f2ea;border-radius:10px;box-shadow:0 15px 35px rgba(0,0,0,.15),inset 0 -2px 10px rgba(0,0,0,.05);display:flex;justify-content:center;align-items:center}.envelope-back{position:absolute;top:0;left:0;width:100%;height:100%;background-color:#f7f2ea;border-radius:10px}.envelope-flap{position:absolute;top:0;left:0;width:100%;height:50%;background-color:#f0e9de;clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top center;transition:transform .7s cubic-bezier(.4,0,.2,1);box-shadow:0 2px 5px rgba(0,0,0,.05);z-index:3}.envelope-content{text-align:center;z-index:2;transform:translateY(50px)}#open-envelope-button{background-color:var(--color-green);color:#fff;border:none;padding:12px 35px;border-radius:50px;font-family:var(--font-body);font-size:1rem;cursor:pointer;transition:background-color .3s,transform .2s;box-shadow:0 5px 15px rgba(0,0,0,.1);margin-top:40px}#open-envelope-button:hover{background-color:var(--color-dark-green);transform:scale(1.05)}.wax-seal{position:absolute;top:45%;left:50%;transform:translate(-50%,-50%);width:60px;height:60px;background-color:var(--color-gold);border-radius:50%;box-shadow:inset 0 -3px 5px rgba(0,0,0,.2),0 2px 4px rgba(0,0,0,.3);z-index:4;transition:transform .4s ease,opacity .4s ease}.wax-seal::before{content:"A&S";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--font-display);font-size:1.5rem;color:rgba(0,0,0,.2);text-shadow:1px 1px 1px rgba(255,255,255,.1)}.envelope-recipient{font-size:1rem;color:var(--color-text)}#envelope-guest-name{display:block;font-family:var(--font-display);font-size:1.5rem;font-weight:600;color:var(--color-gold);margin-top:8px}.envelope-wrapper.opened .envelope-flap{animation:open-flap .7s cubic-bezier(.4,0,.2,1) forwards}.envelope-wrapper.opened{animation:fade-out-envelope .8s ease-out .5s forwards}.envelope-wrapper.opened .wax-seal{animation:break-seal .4s ease-out forwards}
+        /* [RESPONSIVE] Atur detail acara berdampingan di desktop */
+        @media (min-width: 600px) {
+            .event-details-grid { flex-direction: row; }
+        }
+        /* [RESPONSIVE] Atur RSVP dan Wishes berdampingan di desktop */
+        .rsvp-layout-container { display: block; }
+        @media (min-width: 992px) {
+            .rsvp-layout-container { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; }
+            #wishes-gallery-container { margin-top: 0 !important; }
+        }
         /* [PERBAIKAN] Mencegah nomor rekening jadi biru di HP */
         .gift-card a[href^="tel:"] {
             color: inherit; /* Mewarisi warna dari parent (putih) */
@@ -486,38 +490,38 @@
             </p>
         </section>
 
-        <!-- [PERUBAHAN TOTAL] Kartu Mempelai dengan Desain Baru -->
-        <section id="mempelai-pria" class="section" style="margin-bottom: 6vh;">
-            <div class="mempelai-card hidden anim-slide-from-left">
-                <img src="https://github.com/wayanku/undangan-pernikahan-adnyana-swasti/blob/main/UKIRAN%20POJOK%20.webp?raw=true" alt="Ornamen" class="mempelai-card__ornament top">
-                <div class="mempelai-card__photo-wrapper">
-                    <img src="https://github.com/wayanku/undangan-pernikahan-agus-surya-adnyana-luh-swasti/blob/main/fto1/WhatsApp%20Image%202025-09-11%20at%2018.55.23.webp?raw=true" alt="Mempelai Pria" id="groom-card-image" class="mempelai-card__photo" style="object-position: center 20%;">
+        <!-- [RESPONSIVE] Wadah untuk menata mempelai berdampingan -->
+        <div class="couple-container">
+            <section id="mempelai-pria" class="section" style="margin-bottom: 0;">
+                <div class="mempelai-card hidden anim-slide-from-left">
+                    <div class="mempelai-card__photo-wrapper">
+                        <img src="https://github.com/wayanku/undangan-pernikahan-agus-surya-adnyana-luh-swasti/blob/main/fto1/WhatsApp%20Image%202025-09-11%20at%2018.55.23.webp?raw=true" alt="Mempelai Pria" id="groom-card-image" class="mempelai-card__photo" style="object-position: center 5%;">
+                        <img src="https://github.com/wayanku/pernikahan-tema-3/blob/main/sakura%20profilr%20.webp?raw=true" alt="Bingkai Foto" class="mempelai-card__frame">
+                    </div>
+                    <div class="mempelai-card__details">
+                        <h3 class="name" id="groom-name"></h3>
+                        <p style="font-size: clamp(1rem, 3vw, 1.1rem); margin-top: 0; margin-bottom: 0.5rem; color: var(--color-dark-green);" id="groom-family-relation"></p>
+                        <h4 class="parents" style="font-weight: 600; margin-top: 0; color: var(--color-dark-green);" id="groom-parents-names"></h4>
+                    </div>
                 </div>
-                <div class="mempelai-card__details">
-                    <h3 class="name" id="groom-name"></h3>
-                    <p style="font-size: clamp(1rem, 3vw, 1.1rem); margin-top: 0; margin-bottom: 0.5rem; color: var(--color-dark-green);" id="groom-family-relation"></p>
-                    <h4 class="parents" style="font-weight: 600; margin-top: 0; color: var(--color-dark-green);" id="groom-parents-names"></h4>
-                </div>
-                <img src="https://github.com/wayanku/undangan-pernikahan-adnyana-swasti/blob/main/UKIRAN%20POJOK%20.webp?raw=true" alt="Ornamen" class="mempelai-card__ornament bottom">
-            </div>
-        </section>
+            </section>
 
-        <div class="divider hidden anim-zoom-in" style="margin-top: 0; margin-bottom: 0; font-family: var(--font-display); font-weight: 600;">&</div>
+            <div class="divider hidden anim-zoom-in" style="margin-top: 0; margin-bottom: 0; font-family: var(--font-display); font-weight: 600;">&</div>
 
-        <section id="mempelai-wanita" class="section" style="margin-top: 6vh;">
-            <div class="mempelai-card hidden anim-slide-from-right">
-                <img src="https://github.com/wayanku/undangan-pernikahan-adnyana-swasti/blob/main/UKIRAN%20POJOK%20.webp?raw=true" alt="Ornamen" class="mempelai-card__ornament top">
-                <div class="mempelai-card__photo-wrapper">
-                    <img src="https://github.com/wayanku/undangan-pernikahan-agus-surya-adnyana-luh-swasti/blob/main/fto1/WhatsApp%20Image%202025-09-11%20at%2018.55.25.webp?raw=true" alt="Mempelai Wanita" id="bride-card-image" class="mempelai-card__photo">
+            <section id="mempelai-wanita" class="section" style="margin-top: 0;">
+                <div class="mempelai-card hidden anim-slide-from-right">
+                    <div class="mempelai-card__photo-wrapper">
+                        <img src="https://github.com/wayanku/undangan-pernikahan-agus-surya-adnyana-luh-swasti/blob/main/fto1/WhatsApp%20Image%202025-09-11%20at%2018.55.25.webp?raw=true" alt="Mempelai Wanita" id="bride-card-image" class="mempelai-card__photo" style="object-position: center 5%;">
+                        <img src="https://github.com/wayanku/pernikahan-tema-3/blob/main/sakura%20profilr%20.webp?raw=true" alt="Bingkai Foto" class="mempelai-card__frame">
+                    </div>
+                    <div class="mempelai-card__details">
+                        <h3 class="name" id="bride-name"></h3>
+                        <p style="font-size: clamp(1rem, 3vw, 1.1rem); margin-top: 0; margin-bottom: 0.5rem; color: var(--color-dark-green);" id="bride-family-relation"></p>
+                        <h4 class="parents" style="font-weight: 600; margin-top: 0; color: var(--color-dark-green);" id="bride-parents-names"></h4>
+                    </div>
                 </div>
-                <div class="mempelai-card__details">
-                    <h3 class="name" id="bride-name"></h3>
-                    <p style="font-size: clamp(1rem, 3vw, 1.1rem); margin-top: 0; margin-bottom: 0.5rem; color: var(--color-dark-green);" id="bride-family-relation"></p>
-                    <h4 class="parents" style="font-weight: 600; margin-top: 0; color: var(--color-dark-green);" id="bride-parents-names"></h4>
-                </div>
-                <img src="https://github.com/wayanku/undangan-pernikahan-adnyana-swasti/blob/main/UKIRAN%20POJOK%20.webp?raw=true" alt="Ornamen" class="mempelai-card__ornament bottom">
-            </div>
-        </section>
+            </section>
+        </div>
 
         <div class="divider hidden anim-zoom-in"></div>
 
@@ -559,45 +563,48 @@
 
         <section id="rsvp" class="section">
             <h2 class="hidden anim-fade-in-up">Konfirmasi Kehadiran</h2>
-            <div class="rsvp-wishes-container hidden anim-zoom-in" style="--delay: 0.2s;">
-                <form id="rsvp-form" class="rsvp-form">
-                    <div class="form-group" style="border-bottom: none; padding-bottom: 0;">
-                        <label for="nama">Nama Anda</label>
-                        <input type="text" id="nama" name="nama" placeholder="Tuliskan nama Anda" required>
-                    </div>
-                    <div class="form-group">
-                        <fieldset style="border: none; padding: 0; margin: 0;">
-                            <legend style="padding: 0; margin-bottom: 8px; font-weight: 600; color: var(--color-dark-green);">Konfirmasi Kehadiran</legend>
-                            <div class="kehadiran-options">
-                                <input type="radio" id="hadir" name="kehadiran" value="Hadir" required>
-                                <label for="hadir">Hadir</label>
-                                <input type="radio" id="tidak-hadir" name="kehadiran" value="Tidak Hadir">
-                                <label for="tidak-hadir">Tidak Hadir</label>
-                            </div>
-                        </fieldset>
-                    </div>
-                    <div class="form-group" id="jumlah-tamu-group" style="display: none;">
-                        <label for="jumlah">Jumlah Tamu (termasuk Anda)</label>
-                        <select id="jumlah" name="jumlah">
-                            <option value="1">1 Orang</option>
-                            <option value="2">2 Orang</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="ucapan">Ucapan & Doa</label>
-                        <textarea id="ucapan" name="ucapan" placeholder="Tuliskan ucapan dan doa Anda di sini..." required></textarea>
-                    </div>
-                    <button type="submit" class="rsvp-button">
-                        <span>Kirim Konfirmasi</span>
-                        <svg class="icon-send feather feather-send" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
-                    </button>
-                    <p id="form-status" style="text-align: center; margin-top: 15px;"></p>
-                </form>
-            </div>
-            <div id="wishes-gallery-container" class="rsvp-wishes-container hidden anim-fade-in-up" style="margin-top: 2rem; display: none; --delay: 0.4s; text-align: left;">
-                <h3 style="font-family: var(--font-display); font-weight: 600; color: var(--color-dark-green); text-align: center; margin-top: 0; font-size: 1.5rem;">Ucapan & Doa</h3>
-                <p id="no-wishes-message" style="margin-top: 0;">Jadilah yang pertama mengirim ucapan!</p>
-                <div id="wishes-gallery" class="wishes-gallery"></div>
+            <!-- [RESPONSIVE] Wadah untuk menata RSVP berdampingan -->
+            <div class="rsvp-layout-container">
+                <div class="rsvp-wishes-container hidden anim-zoom-in" style="--delay: 0.2s;">
+                    <form id="rsvp-form" class="rsvp-form">
+                        <div class="form-group" style="border-bottom: none; padding-bottom: 0;">
+                            <label for="nama">Nama Anda</label>
+                            <input type="text" id="nama" name="nama" placeholder="Tuliskan nama Anda" required>
+                        </div>
+                        <div class="form-group">
+                            <fieldset style="border: none; padding: 0; margin: 0;">
+                                <legend style="padding: 0; margin-bottom: 8px; font-weight: 600; color: var(--color-dark-green);">Konfirmasi Kehadiran</legend>
+                                <div class="kehadiran-options">
+                                    <input type="radio" id="hadir" name="kehadiran" value="Hadir" required>
+                                    <label for="hadir">Hadir</label>
+                                    <input type="radio" id="tidak-hadir" name="kehadiran" value="Tidak Hadir">
+                                    <label for="tidak-hadir">Tidak Hadir</label>
+                                </div>
+                            </fieldset>
+                        </div>
+                        <div class="form-group" id="jumlah-tamu-group" style="display: none;">
+                            <label for="jumlah">Jumlah Tamu (termasuk Anda)</label>
+                            <select id="jumlah" name="jumlah">
+                                <option value="1">1 Orang</option>
+                                <option value="2">2 Orang</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="ucapan">Ucapan & Doa</label>
+                            <textarea id="ucapan" name="ucapan" placeholder="Tuliskan ucapan dan doa Anda di sini..." required></textarea>
+                        </div>
+                        <button type="submit" class="rsvp-button">
+                            <span>Kirim Konfirmasi</span>
+                            <svg class="icon-send feather feather-send" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                        </button>
+                        <p id="form-status" style="text-align: center; margin-top: 15px;"></p>
+                    </form>
+                </div>
+                <div id="wishes-gallery-container" class="rsvp-wishes-container hidden anim-fade-in-up" style="margin-top: 2rem; display: none; --delay: 0.4s; text-align: left;">
+                    <h3 style="font-family: var(--font-display); font-weight: 600; color: var(--color-dark-green); text-align: center; margin-top: 0; font-size: 1.5rem;">Ucapan & Doa</h3>
+                    <p id="no-wishes-message" style="margin-top: 0;">Jadilah yang pertama mengirim ucapan!</p>
+                    <div id="wishes-gallery" class="wishes-gallery"></div>
+                </div>
             </div>
         </section>
         <div class="divider hidden anim-zoom-in"></div>
