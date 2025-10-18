@@ -184,6 +184,12 @@
             height: calc(100% + 40vh); /* Tambah tinggi elemen lebih banyak */
             background: linear-gradient(to bottom, transparent 0%, rgba(230, 164, 180, 0.6) 25%, rgba(230, 164, 180, 0.6) 75%, transparent 100%);
             z-index: -1;
+
+            /* [SARAN] Menambahkan pola Seigaiha (ombak) */
+            background-image: url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M25 50 a 25 25 0 0 1 50 0 M0 75 a 25 25 0 0 1 50 0 M50 75 a 25 25 0 0 1 50 0 M-25 100 a 25 25 0 0 1 50 0 M25 100 a 25 25 0 0 1 50 0 M75 100 a 25 25 0 0 1 50 0" fill="none" stroke="white" stroke-width="2"/></svg>'), linear-gradient(to bottom, transparent 0%, rgba(230, 164, 180, 0.6) 25%, rgba(230, 164, 180, 0.6) 75%, transparent 100%);
+            background-size: 50px, 100%;
+            background-repeat: repeat, no-repeat;
+            opacity: 0.15; /* Membuat pola sangat samar */
         }
 
         /* [PERUBAHAN] Judul RSVP kembali seperti semula, tapi warna teks putih */
@@ -422,6 +428,42 @@
     z-index: 1; /* Pastikan di atas background amplop */
 }
 
+/* [PERUBAHAN] CSS untuk hiasan atas dan bawah amplop */
+.envelope-border-image {
+    position: absolute;
+    left: 0; /* [PERUBAHAN] Menghilangkan jarak dari tepi kiri */
+    width: 100%; /* [PERUBAHAN] Mengatur lebar menjadi penuh */
+    height: auto;
+    z-index: 101;
+    pointer-events: none;
+    opacity: 1;
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+/* [PERUBAHAN] Menambahkan gradasi pink di belakang gambar */
+.envelope-border-image::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 150%; /* Membuat gradasi lebih besar dari gambar */
+    background: radial-gradient(circle, rgba(230, 164, 180, 0.5) 0%, rgba(230, 164, 180, 0) 70%);
+    z-index: -1; /* Posisikan di belakang gambar */
+    transition: opacity 0.5s ease-out;
+}
+
+.envelope-border-image.top { top: 0; transform: translateY(-25%) scaleY(-1); } /* [PERUBAHAN] Mendorong ke atas dan membalik */
+.envelope-border-image.top::before { top: -25%; }
+
+.envelope-border-image.bottom { bottom: 0; transform: translateY(25%); } /* [PERUBAHAN] Mendorong ke bawah */
+.envelope-border-image.bottom::before { bottom: -25%; }
+
+/* Animasi menghilang saat amplop dibuka */
+.envelope-border-image.fade-out {
+    opacity: 0;
+    transform: var(--transform-fade-out);
+}
+.envelope-border-image.fade-out::before { opacity: 0; }
     </style>
 </head>
 <body>
@@ -432,8 +474,8 @@
     <!-- [PERUBAHAN] Menambahkan kelas dan variabel CSS untuk animasi pojok -->
     <!-- Halaman Amplop -->
     <div id="envelope-container">
-        <img src="https://github.com/wayanku/undangan-pernikahan-adnyana-swasti/blob/main/pojokan.webp?raw=true" alt="Pojok Kiri Atas" class="corner-ornament top-left" style="position: absolute; top: 0; left: 0; width: 150px; --original-transform: scaleY(-1);">
-        <img src="https://github.com/wayanku/undangan-pernikahan-adnyana-swasti/blob/main/pojokan.webp?raw=true" alt="Pojok Kanan Atas" class="corner-ornament top-right" style="position: absolute; top: 0; right: 0; width: 150px; --original-transform: rotate(180deg);">
+        <!-- [PERUBAHAN] Mengganti hiasan pojok dengan hiasan atas dan bawah -->
+        <img src="https://github.com/wayanku/pernikahan-tema-3/blob/main/sakura%20bawah%20.webp?raw=true" alt="Hiasan Atas" class="envelope-border-image top" style="--transform-fade-out: translateY(-55%) scaleY(-1);">
         <div class="envelope-wrapper">
             <div class="envelope">
                 <div class="envelope-back"></div>
@@ -445,8 +487,7 @@
             </div>
             <button id="open-envelope-button">Buka Amplop</button>
         </div>
-        <img src="https://github.com/wayanku/undangan-pernikahan-adnyana-swasti/blob/main/pojokan.webp?raw=true" alt="Pojok Kiri Bawah" class="corner-ornament bottom-left" style="position: absolute; bottom: 0; left: 0; width: 150px; --original-transform: rotate(0deg);">
-        <img src="https://github.com/wayanku/undangan-pernikahan-adnyana-swasti/blob/main/pojokan.webp?raw=true" alt="Pojok Kanan Bawah" class="corner-ornament bottom-right" style="position: absolute; bottom: 0; right: 0; width: 150px; --original-transform: scaleX(-1);">
+        <img src="https://github.com/wayanku/pernikahan-tema-3/blob/main/sakura%20bawah%20.webp?raw=true" alt="Hiasan Bawah" class="envelope-border-image bottom" style="--transform-fade-out: translateY(55%);">
     </div>
 
     <!-- Audio Player -->
@@ -840,8 +881,8 @@
                     music.play().catch(error => console.log("Autoplay dicegah oleh browser."));
                     musicToggle.classList.add('show', 'playing');
 
-                    // [PERBAIKAN] Memicu animasi menghilang pada hiasan pojok
-                    document.querySelectorAll('.corner-ornament').forEach(ornament => {
+                    // [PERUBAHAN] Memicu animasi menghilang pada hiasan atas dan bawah
+                    document.querySelectorAll('.envelope-border-image').forEach(ornament => {
                         ornament.classList.add('fade-out');
                     });
 
