@@ -9,7 +9,7 @@
     <!-- [KREASI BARU] Favicon dan Meta Tags untuk Social Media (WhatsApp, dll.) -->
     <link rel="icon" href="https://github.com/wayanku/pernikahan-tema-3/blob/main/foto%203,foto%205,foto%206/foto1.webp?raw=true" type="image/jpeg">
     <meta property="og:title" content="Undangan Pernikahan: Budi Santoso & Citra Lestari">
-    <meta property="og:description" content="Kami mengundang Anda untuk hadir di acara pernikahan kami. Senin, 29 September 2025.">
+    <meta property="og:description" content="Kami mengundang Anda untuk hadir di acara pernikahan kami. Senin, 29 September 2030.">
     <!-- Ganti URL gambar ini dengan gambar yang ingin Anda tampilkan di WhatsApp -->
     <meta property="og:image" content="https://github.com/wayanku/pernikahan-tema-3/blob/main/foto%203,foto%205,foto%206/foto1.webp?raw=true" id="meta-og-image">
     <!-- Ganti URL ini dengan URL website Anda setelah di-hosting -->
@@ -215,14 +215,66 @@
         }
         
         .parents { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.3rem, 5vw, 1.6rem); margin-top: 10px; line-height: 1.7; }
-        .quote {
-            margin-top: 40px; padding: 25px; background-color: var(--color-off-white);
-            border-left: 4px solid var(--color-gold); font-style: italic; text-align: left;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+        
+        /* [PERUBAHAN] Desain baru untuk bagian Kutipan */
+        /* [PERUBAHAN] Desain baru untuk Kutipan (Gaya Gulungan Kertas) */
+        #kutipan {
+            text-align: center;
+            padding-left: 10px; /* Beri sedikit ruang agar gulungan tidak menempel di tepi */
+            padding-right: 10px;
         }
-        .quote p:first-of-type { font-family: var(--font-display); font-style: italic; }
-        .quote-source { font-style: normal; display: block; }
-        .quote-translation { margin-top: 15px; font-style: normal; }
+        .scroll-container {
+            /* [PERUBAHAN] Menambahkan tekstur kertas */
+            background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png'), linear-gradient(to bottom, #f7f2ea, #f3ede1);
+            background-color: #f7f2ea;
+            /* [PERUBAHAN] Mengurangi padding agar tidak terlalu lebar */
+            padding: 2.5rem 1.5rem;
+            position: relative;
+            /* [PERUBAHAN] Menambahkan bayangan dalam untuk efek gulungan */
+            box-shadow: 
+                0 15px 35px rgba(0,0,0,0.2), /* Bayangan luar lebih halus */
+                /* [PERUBAHAN] Efek gulungan lebih dalam dan realistis */
+                inset 0 20px 20px -20px rgba(0,0,0,0.4), 
+                inset 0 -20px 20px -20px rgba(0,0,0,0.4);
+            border-radius: 2px;
+        }
+        .scroll-container::before,
+        .scroll-container::after {
+            content: '';
+            position: absolute;
+            /* [PERUBAHAN] Mengurangi tonjolan gagang kayu */
+            left: -10px;
+            width: calc(100% + 20px);
+            height: 25px; /* Tinggi gagang gulungan */
+            /* [PERUBAHAN] Gradasi kayu diperbarui untuk efek 3D yang lebih nyata */
+            background: linear-gradient(90deg, #6b4f35 0%, #a88a6c 48%, #e0c4a5 50%, #a88a6c 52%, #6b4f35 100%);
+            border-radius: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+        .scroll-container::before { top: -12px; }
+        .scroll-container::after { bottom: -12px; }
+
+        /* [PERUBAHAN] Mengganti font menjadi lebih klasik */
+        .scroll-container #quote-text {
+            font-family: var(--font-nama);
+            /* [PERUBAHAN] Menyesuaikan ukuran font agar pas */
+            font-size: clamp(1.8rem, 6vw, 2.2rem);
+            font-style: normal;
+            color: var(--color-text);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+        .scroll-container #quote-source {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 1rem; /* Menambah jarak bawah */
+            color: var(--color-dark-green);
+        }
+        .scroll-container #quote-translation {
+            font-size: 0.95rem;
+            font-family: var(--font-body); /* Menyamakan font */
+            margin-top: 1rem;
+        }
         
         /* [PERUBAHAN TOTAL] Desain tanpa kartu, bingkai di depan */
         .mempelai-card {
@@ -688,7 +740,15 @@
 
         <div class="divider hidden anim-zoom-in"></div>
 
-        <section id="kutipan" class="section hidden anim-fade-in-up"> <div class="ornament-container"> <img src="" alt="Hiasan" class="ornament-image ornament-right" style="--scale: 1;"> </div> <div class="quote" id="quote-block"> <p class="hidden anim-fade-in-up" id="quote-text"></p> <span class="hidden anim-fade-in-up quote-source" style="--delay: 0.2s;" id="quote-source"></span> <p class="hidden anim-fade-in-up quote-translation" style="--delay: 0.4s;" id="quote-translation"></p> </div> </section>
+        <!-- [PERUBAHAN] Tampilan baru untuk Kutipan -->
+        <section id="kutipan" class="section">
+            <div class="scroll-container hidden anim-zoom-in">
+                <p class="hidden anim-fade-in-up" id="quote-text"></p>
+                <span class="hidden anim-fade-in-up" style="--delay: 0.2s;" id="quote-source"></span>
+                <p class="hidden anim-fade-in-up" style="--delay: 0.4s;" id="quote-translation"></p>
+            </div>
+        </section>
+        
         
         <!-- [PERUBAHAN] Tampilan baru untuk Detail Acara -->
         <section id="acara" class="section" style="text-align: center; background: none;">
@@ -822,7 +882,7 @@
             groom: { name: "Budi Santoso", familyRelation: "Putra dari pasangan", father: "Joko Santoso", mother: "Siti Aminah" },
             bride: { name: "Citra Lestari, S.Kom", familyRelation: "Putri dari pasangan", father: "Ahmad Wijaya", mother: "Rina Hartati" },
             ceremony: { subject: "Upacara Pawiwahan (Pernikahan) putra-putri kami." },
-            event: { dateTime: "Sep 29, 2025 08:00:00", day: "Senin", date: "29", month: "September", year: "2025", time: "08.00 WITA - Selesai", location: "Desa Amertha Sari, Kembang Mertha, Kec. Dumoga Timur, Kab. Bolaang Mongondow", mapUrl: "https://maps.app.goo.gl/9VApSJFiUDKLLTPJ7" },
+            event: { dateTime: "Sep 29, 2030 08:00:00", day: "Senin", date: "29", month: "September", year: "2030", time: "08.00 WITA - Selesai", location: "Desa Amertha Sari, Kembang Mertha, Kec. Dumoga Timur, Kab. Bolaang Mongondow", mapUrl: "https://maps.app.goo.gl/9VApSJFiUDKLLTPJ7" },
             quote: { text: `"Gṛhṇāmi te saubhagatvāya hastam, Mayā patyā jaradaṣṭir yathāsaḥ, Bhago aryamā savitā purandhir, Mahyaṁ tvādurgārhapatyāya devāḥ."`, source: "(Rgveda : 10.85.36)", translation: "Dalam rangka mencapai kebahagiaan, kupegang tanganmu. Semoga dengan diriku sebagai suamimu, engkau akan mencapai usia lanjut. Para Deva yaitu Bhaga, Aryama, Savita dan Purandhi telah menyerahkan dirimu kepadaku untuk menjadi ibu rumah tangga." },
             images: {
                 favicon: "https://github.com/wayanku/pernikahan-tema-3/blob/main/foto%203,foto%205,foto%206/foto1.webp?raw=true",
