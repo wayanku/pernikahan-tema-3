@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -200,7 +201,7 @@
         
         /* [PERUBAHAN] Mengubah warna judul galeri menjadi putih */
         #galeri h2 {
-            color: white;
+            color: var(--color-gold);
         }
 
         .salam { 
@@ -216,61 +217,34 @@
         
         .parents { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.3rem, 5vw, 1.6rem); margin-top: 10px; line-height: 1.7; }
         
-        /* [PERUBAHAN] Desain baru untuk bagian Kutipan */
-        /* [PERUBAHAN] Desain baru untuk Kutipan (Gaya Gulungan Kertas) */
+        /* [PERBAIKAN] Desain baru untuk bagian Kutipan (Plakat Modern) */
         #kutipan {
             text-align: center;
-            padding-left: 10px; /* Beri sedikit ruang agar gulungan tidak menempel di tepi */
-            padding-right: 10px;
         }
-        .scroll-container {
-            /* [PERUBAHAN] Menambahkan tekstur kertas */
-            background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png'), linear-gradient(to bottom, #f7f2ea, #f3ede1);
-            background-color: #f7f2ea;
-            /* [PERUBAHAN] Mengurangi padding agar tidak terlalu lebar */
-            padding: 2.5rem 1.5rem;
+        .quote-plaque {
+            background-color: var(--color-off-white);
+            border: 1px solid #EAE8E1;
+            padding: 2rem 1.5rem;
             position: relative;
-            /* [PERUBAHAN] Menambahkan bayangan dalam untuk efek gulungan */
-            box-shadow: 
-                0 15px 35px rgba(0,0,0,0.2), /* Bayangan luar lebih halus */
-                /* [PERUBAHAN] Efek gulungan lebih dalam dan realistis */
-                inset 0 20px 20px -20px rgba(0,0,0,0.4), 
-                inset 0 -20px 20px -20px rgba(0,0,0,0.4);
-            border-radius: 2px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            border-radius: 15px;
         }
-        .scroll-container::before,
-        .scroll-container::after {
-            content: '';
-            position: absolute;
-            /* [PERUBAHAN] Mengurangi tonjolan gagang kayu */
-            left: -10px;
-            width: calc(100% + 20px);
-            height: 25px; /* Tinggi gagang gulungan */
-            /* [PERUBAHAN] Gradasi kayu diperbarui untuk efek 3D yang lebih nyata */
-            background: linear-gradient(90deg, #6b4f35 0%, #a88a6c 48%, #e0c4a5 50%, #a88a6c 52%, #6b4f35 100%);
-            border-radius: 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-        }
-        .scroll-container::before { top: -12px; }
-        .scroll-container::after { bottom: -12px; }
 
-        /* [PERUBAHAN] Mengganti font menjadi lebih klasik */
-        .scroll-container #quote-text {
+        .quote-plaque #quote-text {
             font-family: var(--font-nama);
-            /* [PERUBAHAN] Menyesuaikan ukuran font agar pas */
-            font-size: clamp(1.8rem, 6vw, 2.2rem);
+            font-size: clamp(1.7rem, 5vw, 2.1rem);
             font-style: normal;
             color: var(--color-text);
             line-height: 1.7;
             margin-bottom: 1.5rem;
         }
-        .scroll-container #quote-source {
+        .quote-plaque #quote-source {
             display: block;
             font-weight: 600;
-            margin-bottom: 1rem; /* Menambah jarak bawah */
+            margin-bottom: 1rem;
             color: var(--color-dark-green);
         }
-        .scroll-container #quote-translation {
+        .quote-plaque #quote-translation {
             font-size: 0.95rem;
             font-family: var(--font-body); /* Menyamakan font */
             margin-top: 1rem;
@@ -700,7 +674,7 @@
             <h2 class="salam hidden anim-zoom-in" style="margin-bottom: 2rem;">Om Swastyastu</h2>
             <p>
                 <span class="line-wrapper hidden anim-fade-in-up" style="--delay: 0.1s;">Atas Asung Kertha Wara Nugraha Ida Sang Hyang Widhi Wasa/Tuhan Yang Maha Esa</span>
-                <span class="line-wrapper hidden anim-fade-in-up" style="--delay: 0.2s; color: var(--color-dark-green);">kami bermaksud mengundang Bapak/Ibu/Saudara/i pada Upacara Manusa Yadnya</span>
+                <span class="line-wrapper hidden anim-fade-in-up" style="--delay: 0.2s;">kami bermaksud mengundang Bapak/Ibu/Saudara/i pada Upacara Manusa Yadnya</span>
                 <span class="line-wrapper hidden anim-fade-in-up" style="--delay: 0.3s;" id="ceremony-subject"></span>
             </p>
         </section>
@@ -742,7 +716,7 @@
 
         <!-- [PERUBAHAN] Tampilan baru untuk Kutipan -->
         <section id="kutipan" class="section">
-            <div class="scroll-container hidden anim-zoom-in">
+            <div class="quote-plaque hidden anim-zoom-in">
                 <p class="hidden anim-fade-in-up" id="quote-text"></p>
                 <span class="hidden anim-fade-in-up" style="--delay: 0.2s;" id="quote-source"></span>
                 <p class="hidden anim-fade-in-up" style="--delay: 0.4s;" id="quote-translation"></p>
@@ -775,8 +749,52 @@
             </a>
         </section>
         
-        <section id="penutup" class="section hidden anim-fade-in-up"> <div class="ornament-container"> <img src="" alt="Hiasan" class="ornament-image ornament-left" style="--scale: -1; bottom: 30vh;" id="ornament-left-2"> </div> <p> <span class="line-wrapper hidden anim-fade-in-up" style="--delay: 0.1s;">Merupakan suatu kebahagiaan dan kehormatan bagi kami, apabila Bapak/Ibu/Saudara/i, berkenan hadir untuk memberikan doa restu.</span> <span class="line-wrapper hidden anim-fade-in-up" style="--delay: 0.2s;">Atas kehadiran dan doa restunya, kami ucapkan terima kasih.</span> </p> <div class="hidden anim-zoom-in" style="--delay: 0.3s; margin-top: 2rem; margin-bottom: 1.5rem;"> <img src="https://raw.githubusercontent.com/wayanku/undangan-metatah/main/o-swastyastu-1-300x98-1,OM-SANTIH1,swastika12/OM-SANTIH1.webp" alt="Om Shanti" style="width: 250px; height: auto;"> </div> <h2 class="salam hidden anim-fade-in-up" style="--delay: 0.4s; font-size: 2rem; margin-top: 0; margin-bottom: 1.5rem;">Om Shanti Shanti Shanti Om</h2> <p class="hidden anim-fade-in-up" style="--delay: 0.5s; margin-bottom: 0.5rem;">Kami yang berbahagia,</p> <p class="family-name hidden anim-fade-in-up" style="--delay: 0.6s; font-size: 1.1rem; margin-top: 0;" id="closing-family-name"></p> </section> <section id="countdown-section" class="section hidden anim-fade-in-up"> <h2>Menuju Acara</h2> <div id="countdown" class="countdown"> <div> <span id="days">00</span> <small>Hari</small> </div> <div> <span id="hours">00</span> <small>Jam</small> </div> <div> <span id="minutes">00</span> <small>Menit</small> </div> <div> <span id="seconds">00</span> <small>Detik</small> </div> </div> </section> <section id="galeri" class="section"> <h2 class="hidden anim-fade-in-up">Foto Galeri</h2> <div class="gallery-grid hidden anim-fade-in-up" style="--delay: 0.2s;"> <div class="gallery-item"> <img src="https://github.com/wayanku/undangan-pernikahan-agus-surya-adnyana-luh-swasti/blob/main/fto1/WhatsApp%20Image%202025-09-11%20at%2018.55.50.webp?raw=true" alt="Galeri Foto 1" loading="lazy"> </div> <div class="gallery-item"> <img src="https://github.com/wayanku/undangan-pernikahan-agus-surya-adnyana-luh-swasti/blob/main/fto1/WhatsApp%20Image%202025-09-11%20at%2018.55.54.webp?raw=true" alt="Galeri Foto 2" loading="lazy"> </div> <div class="gallery-item"> <img src="https://github.com/wayanku/undangan-pernikahan-agus-surya-adnyana-luh-swasti/blob/main/fto1/WhatsApp%20Image%202025-09-11%20at%2018.55.56.webp?raw=true" alt="Galeri Foto 3" loading="lazy"> </div> <div class="gallery-item"> <img src="https://github.com/wayanku/undangan-pernikahan-agus-surya-adnyana-luh-swasti/blob/main/fto1/WhatsApp%20Image%202025-09-11%20at%2018.55.57.webp?raw=true" alt="Galeri Foto 4" loading="lazy"> </div> </div> </section> <section id="momen" class="section"> <h2 class="hidden anim-fade-in-up">Momen Spesial</h2> <div class="moments-card-stack hidden anim-zoom-in" id="moments-slider"> </div> </section> <p class="hidden anim-fade-in-up" style="font-style: italic; color: #888; margin-top: -10vh; margin-bottom: 10vh; font-size: 0.9rem; text-align: center;">Klik foto untuk melihat lainnya</p>
-<section id="video" class="section hidden anim-zoom-in"> <h2>Video</h2> <div class="video-container"> <iframe src="https://www.youtube.com/embed/8DGlCSJwP0Q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> </div> </section>
+        <section id="penutup" class="section hidden anim-fade-in-up">
+            <p>
+                <span class="line-wrapper hidden anim-fade-in-up" style="--delay: 0.1s;">Merupakan suatu kebahagiaan dan kehormatan bagi kami, apabila Bapak/Ibu/Saudara/i, berkenan hadir untuk memberikan doa restu.</span>
+                <span class="line-wrapper hidden anim-fade-in-up" style="--delay: 0.2s;">Atas kehadiran dan doa restunya, kami ucapkan terima kasih.</span>
+            </p>
+            <div class="hidden anim-zoom-in" style="--delay: 0.3s; margin-top: 2rem; margin-bottom: 1.5rem;">
+                <img src="https://raw.githubusercontent.com/wayanku/undangan-metatah/main/o-swastyastu-1-300x98-1,OM-SANTIH1,swastika12/OM-SANTIH1.webp" alt="Om Shanti" style="width: 250px; height: auto;">
+            </div>
+            <h2 class="salam hidden anim-fade-in-up" style="--delay: 0.4s; font-size: 2rem; margin-top: 0; margin-bottom: 1.5rem;">Om Shanti Shanti Shanti Om</h2>
+            <p class="hidden anim-fade-in-up" style="--delay: 0.5s; margin-bottom: 0.5rem;">Kami yang berbahagia,</p>
+            <p class="family-name hidden anim-fade-in-up" style="--delay: 0.6s; font-size: 1.1rem; margin-top: 0;" id="closing-family-name"></p>
+        </section>
+
+        <section id="countdown-section" class="section hidden anim-fade-in-up">
+            <h2>Menuju Acara</h2>
+            <div id="countdown" class="countdown">
+                <div> <span id="days">00</span> <small>Hari</small> </div>
+                <div> <span id="hours">00</span> <small>Jam</small> </div>
+                <div> <span id="minutes">00</span> <small>Menit</small> </div>
+                <div> <span id="seconds">00</span> <small>Detik</small> </div>
+            </div>
+        </section>
+
+        <section id="galeri" class="section">
+            <h2 class="hidden anim-fade-in-up">Foto Galeri</h2>
+            <div class="gallery-grid hidden anim-fade-in-up" style="--delay: 0.2s;">
+                <div class="gallery-item"> <img src="https://github.com/wayanku/undangan-pernikahan-agus-surya-adnyana-luh-swasti/blob/main/fto1/WhatsApp%20Image%202025-09-11%20at%2018.55.50.webp?raw=true" alt="Galeri Foto 1" loading="lazy"> </div>
+                <div class="gallery-item"> <img src="https://github.com/wayanku/undangan-pernikahan-agus-surya-adnyana-luh-swasti/blob/main/fto1/WhatsApp%20Image%202025-09-11%20at%2018.55.54.webp?raw=true" alt="Galeri Foto 2" loading="lazy"> </div>
+                <div class="gallery-item"> <img src="https://github.com/wayanku/undangan-pernikahan-agus-surya-adnyana-luh-swasti/blob/main/fto1/WhatsApp%20Image%202025-09-11%20at%2018.55.56.webp?raw=true" alt="Galeri Foto 3" loading="lazy"> </div>
+                <div class="gallery-item"> <img src="https://github.com/wayanku/undangan-pernikahan-agus-surya-adnyana-luh-swasti/blob/main/fto1/WhatsApp%20Image%202025-09-11%20at%2018.55.57.webp?raw=true" alt="Galeri Foto 4" loading="lazy"> </div>
+            </div>
+        </section>
+
+        <section id="momen" class="section">
+            <h2 class="hidden anim-fade-in-up">Momen Spesial</h2>
+            <div class="moments-card-stack hidden anim-zoom-in" id="moments-slider"> </div>
+        </section>
+
+        <p class="hidden anim-fade-in-up" style="font-style: italic; color: #888; margin-top: -10vh; margin-bottom: 10vh; font-size: 0.9rem; text-align: center;">Klik foto untuk melihat lainnya</p>
+
+        <section id="video" class="section hidden anim-zoom-in">
+            <h2>Video</h2>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/8DGlCSJwP0Q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+        </section>
 
         <!-- Bagian Hadiah dengan 2 Rekening dan Tombol -->
         <section id="hadiah" class="section">
@@ -784,15 +802,16 @@
     color: black;
 ">Kirim Hadiah</h2>
             <p class="hidden anim-fade-in-up" style="--delay: 0.1s;">Doa restu Anda merupakan karunia yang sangat berarti bagi kami. Namun jika memberi adalah ungkapan tanda kasih, Anda dapat memberi kado secara online.</p>
+            
             <button id="show-rekening-button" class="map-button-outline hidden anim-fade-in-up" style="--delay: 0.2s; margin-top: 1rem;">
                 Tampilkan Nomor Rekening
             </button>
             
             <!-- Kontainer rekening sekarang disembunyikan secara default -->
-            <div id="rekening-container" style="display: none; margin-top: 1.5rem; flex-direction: column; gap: 1.5rem;">                <div class="gift-card anim-zoom-in">
-                    <p style="font-weight: bold; font-size: 1.2rem; margin-bottom: 10px; color: white;">Bank ABC</p>
+            <div id="rekening-container" style="display: none; margin-top: 1.5rem; display: flex; flex-direction: column; gap: 1.5rem;">                <div class="gift-card anim-zoom-in">
+                    <p style="font-weight: bold; font-size: 1.2rem; margin-bottom: 10px; color: white;">Bank BSI</p>
                     <p style="margin-top: 0; font-size: 0.9rem; color: rgba(255,255,255,0.8);">a.n. Budi Santoso</p>
-                    <h3 class="account-number">1234 0100 5678 910</h3>
+                    <h3 class="account-number">123401005678910</h3>
                     <button class="copy-button" data-rekening="123401005678910">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
                         <span>Salin Rekening</span>
@@ -800,7 +819,7 @@
                 </div>
                 <!-- Rekening Mandiri -->
                 <div class="gift-card anim-zoom-in">
-                    <p style="font-weight: bold; font-size: 1.2rem; margin-bottom: 10px; color: white;">Bank XYZ</p>
+                    <p style="font-weight: bold; font-size: 1.2rem; margin-bottom: 10px; color: white;">Bank BNI</p>
                     <p style="margin-top: 0; font-size: 0.9rem; color: rgba(255,255,255,0.8);">a.n. Citra Lestari</p>
                     <h3 class="account-number">1300012345678</h3>
                     <button class="copy-button" data-rekening="1300012345678">
@@ -812,7 +831,7 @@
         </section>
 
         <section id="rsvp" class="section">
-            <h2 class="hidden anim-fade-in-up">Konfirmasi Kehadiran</h2>
+            <h2 class="hidden anim-fade-in-up" style="color: var(--color-gold);">Konfirmasi Kehadiran</h2>
             <!-- [RESPONSIVE] Wadah untuk menata RSVP berdampingan -->
             <div class="rsvp-layout-container">
                 <div class="rsvp-wishes-container hidden anim-zoom-in" style="--delay: 0.2s;">
@@ -1115,15 +1134,14 @@
                         body.classList.add('scroll-enabled');
                         mainContent.style.display = 'block';
                         observeElements(); // <-- Panggil observer SETELAH konten terlihat
+                    // [PERBAIKAN] Memulai musik setelah amplop dibuka
+                    music.play().catch(error => console.log("Autoplay dicegah oleh browser."));
                     }, 1300);
                 });
 
-                musicToggle.addEventListener('click', function() {
-                    if (music.paused) { music.play(); this.classList.add('playing'); } 
-                    else { music.pause(); this.classList.remove('playing'); }
-                });
+                musicToggle.addEventListener('click', function() { if (music.paused) { music.play(); this.classList.add('playing'); } else { music.pause(); this.classList.remove('playing'); } });
 
-                // [PERUBAHAN] Event listener untuk tombol tampilkan rekening
+                // [PENGEMBALIAN] Event listener untuk tombol tampilkan rekening
                 document.getElementById('show-rekening-button').addEventListener('click', function() {
                     const container = document.getElementById('rekening-container');
                     const isHidden = container.style.display === 'none' || container.style.display === '';
@@ -1137,7 +1155,6 @@
                     }
                 });
 
-                // Event listener untuk semua tombol salin rekening
                 document.querySelectorAll('.copy-button').forEach(button => {
                     button.addEventListener('click', function() {
                         const accountNumber = this.dataset.rekening;
